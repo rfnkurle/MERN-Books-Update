@@ -16,7 +16,14 @@ const resolvers = {
   },
 
   Mutation: {
-    // addUser, login, addBook, removeBook
+    // addUser, login, addBook, removeBook to match typeDef parameters
+    addUser: async (parent, args) => {
+        const user = await User.create(args);
+        const token = signToken(user);
+  
+        return { token, user };
+      }
+
   }
 };
 
