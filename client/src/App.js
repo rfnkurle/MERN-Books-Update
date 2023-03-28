@@ -10,9 +10,31 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import Navbar from './components/Navbar';
 
+//universal uri for app
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+//create user context
+const authLink = setContext((_, { headers }) => {
+  // grabs token from local storage that was added through helper
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+//configure apollo client for provider
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
 function App() {
   return (
-    <div className="App">
+    <ApolloProvider client={client}>
+
       
       <Router>
         <>
@@ -33,7 +55,7 @@ function App() {
           </Routes>
         </>
       </Router>
-    </div>
+      </ApolloProvider>
   );
 }
 
