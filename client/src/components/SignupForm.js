@@ -30,6 +30,7 @@ const SignupForm = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    //spread and destructure for react form
     setUserFormData({ ...userFormData, [name]: value });
   };
 
