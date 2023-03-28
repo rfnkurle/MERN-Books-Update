@@ -9,6 +9,8 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Navbar from './components/Navbar';
+import SearchBooks from './pages/SearchBooks';
+import SavedBooks from './pages/SavedBooks';
 
 //universal uri for app
 const httpLink = createHttpLink({
@@ -42,11 +44,11 @@ function App() {
           <Routes>
             <Route 
               path="/" 
-             
+             element={<SearchBooks/>} 
             />
             <Route 
               path="/saved" 
-             
+              element={<SavedBooks/>} 
             />
             <Route 
               path='*' 

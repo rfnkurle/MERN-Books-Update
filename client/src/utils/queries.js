@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 //connects to me query on backend
-export const GET_USER = gql`
+export const QUERY_ME = gql`
   {
     me {
       _id
