@@ -1,5 +1,6 @@
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
   Query: {
@@ -39,11 +40,11 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    saveBook: async ( { bookData }, context) => {
+    saveBook: async ( parent, { bookData }, context) => {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { savedBooks: bookData} },
+          { $push: { savedBooks: bookData } },
           { new: true }
         );
 

@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-// app.use(routes);
+
 
 //start server as configured, apply middleware, and run PORT if all checks out
 const startServer = async (typeDefs, resolvers) => {
