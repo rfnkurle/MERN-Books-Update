@@ -1,5 +1,7 @@
 # MERN Book Search with GraphQL
 
+Google books search with favorite books archive
+
 
 ## Live URL 
 
