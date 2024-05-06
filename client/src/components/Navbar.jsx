@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
@@ -18,11 +18,12 @@ const AppNavbar = () => {
             Google Books Search
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse id='navbar'>
-            <Nav className='ml-auto'>
+          <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
+            <Nav className='ml-auto d-flex'>
               <Nav.Link as={Link} to='/'>
                 Search For Books
               </Nav.Link>
+              {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>

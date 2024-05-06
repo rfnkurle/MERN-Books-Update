@@ -1,19 +1,21 @@
 // use this to decode a token and get the user's information out of it
 import decode from 'jwt-decode';
 
-
+// create a new class to instantiate for a user
 class AuthService {
   // get user data
   getProfile() {
     return decode(this.getToken());
   }
 
+  // check if user's logged in
   loggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token); // handwaiving here
   }
-//sets life time for login
+
+  // check if token is expired
   isTokenExpired(token) {
     try {
       const decoded = decode(token);
@@ -26,20 +28,20 @@ class AuthService {
   }
 
   getToken() {
-    // provides apollo server with token for user context
+    // Retrieves the user token from localStorage
     return localStorage.getItem('id_token');
   }
 
   login(idToken) {
-    //  token to localStorage for user context
+    // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
     window.location.assign('/');
   }
 
   logout() {
-    // deletes session by removing token  from localStorage
+    // Clear user token and profile data from localStorage
     localStorage.removeItem('id_token');
-    //redirect
+    // this will reload the page and reset the state of the application
     window.location.assign('/');
   }
 }

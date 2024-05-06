@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client';
-//connects to me query on backend
+
 export const QUERY_ME = gql`
   {
     me {
