@@ -1,18 +1,19 @@
 const { User } = require('../models');
-const { signToken } = require('../utils/auth');
-const { AuthenticationError } = require('apollo-server-express');
+const { signToken, AuthenticationError } = require('../utils/auth');
+//const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
   Query: {
     //"me" querys queries mongo db and finds user based on context user id
-    me: async (args, context) => {
+    me: async (parent, args, context) => {
       if (context.user) {
+        
         const userData = await User.findOne({ _id: context.user._id }).select('-__v -password');
 
         return userData;
       }
 
-      throw new AuthenticationError('Yo homie. You gotta login.');
+      throw AuthenticationError
     },
   },
 

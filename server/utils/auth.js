@@ -1,10 +1,16 @@
 const jwt = require('jsonwebtoken');
 require("dotenv").config()
+const { GraphQLError } = require('graphql');
 
 const secret = "dontsteal";
 const expiration = '1h';
 
 module.exports = {
+  AuthenticationError: new GraphQLError('Could not authenticate user.', {
+    extensions: {
+      code: 'UNAUTHENTICATED',
+    },
+  }),
   authMiddleware: function ({ req }) {
 
     let token = req.body.token || req.query.token || req.headers.authorization;
